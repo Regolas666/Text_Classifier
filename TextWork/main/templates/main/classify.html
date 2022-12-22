@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Классификатор текста
+{% endblock %}
+
+{% block content %}
+    <h1>Определить тип новости</h1>
+    <p>Данный классификатор позволяет распределять новости по двум тегам: pc и кино</p>
+    <form method="post">
+        {% csrf_token %}
+        <br>
+        {{form.full_text}}<br>
+       <button type="submit" class="btn btn-success">Классифицировать</button>
+        <br>
+        <label class="form-label"> {{predict}} </label>
+        <br>
+        <span>{{ error }}</span>
+    </form>
+{% endblock %}

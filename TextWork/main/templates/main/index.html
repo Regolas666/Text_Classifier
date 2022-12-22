@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Все новости</h1>
+        {% if news %}
+            {% for element in news%}
+                <div class = "alert alert-primary mt-2">
+                    <h4>{{ element.title }}</h4>
+                    <style>
+                        .size {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            padding: 5px;
+                            text-overflow: clip;
+                        }
+                        .size:hover {
+                            background: aliceblue;
+                            white-space: normal;
+                        }
+                    </style>
+                    <div class = "size">
+                    <p>{{ element.full_text }}</p></div>
+                    <h5>{{ element.tag }}</h5> <br>
+                    <a href="{% url 'news_delete' element.id %}" class="btn btn-danger">Удалить</a>
+                    <a href="{% url 'news_update' element.id %}" class="btn btn-info">Редактировать</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>У нас нет записей!</p>
+        {% endif %}
+    </div>
+{% endblock %}

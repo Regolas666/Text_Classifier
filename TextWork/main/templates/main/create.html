@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Новость
+{% endblock %}
+
+{% block content %}
+    <h1>Заполните поля новости</h1>
+        <form method="post">
+            {% csrf_token %}
+            <br>{{ form.tag }}<br>
+            <br>{{ form.title }}<br>
+            <br>{{ form.full_text }}<br>
+
+            <button class="btn btn-success" type="submit">Сохранить</button>
+            <span>{{ error }}</span>
+        </form>
+{% endblock %}
