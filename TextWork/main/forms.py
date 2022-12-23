@@ -1,4 +1,4 @@
-from .models import Articles
+from .models import Articles, TagsModel
 from django.forms import ModelForm, TextInput, Textarea
 
 
@@ -41,3 +41,9 @@ class TextsFormSecond(ModelForm):
 
             })
         }
+
+
+class FilterTag(ModelForm):
+    class Meta:
+        model = TagsModel
+        fields = ['tagId', 'tagName']

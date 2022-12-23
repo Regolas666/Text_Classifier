@@ -5,8 +5,29 @@
 {% endblock %}
 
 {% block content %}
+<form method="post">
+    {% csrf_token %}
     <div class="features">
         <h1>Все новости</h1>
+        <div class="dropdown-content">
+            <form action="PageObjects" method="post">
+                <tr><th><label for="id_filter_by">Фильтровать по категориям:</label></th></tr>
+                <select id="id_filter_by" name="filter_by" required>
+                    <!--<select name="filter_by">-->
+                    {% for temp in choices %}
+                    <option value="{{ temp.tagId }} ">{{ temp.tagName }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="вывести">
+
+            </form>
+            <li><a href="{% url 'news/showAll' %}">Показать все</a> </li>
+            <div class="invalid-feedback">
+                Пожалуйста, введите существующее значение
+            </div>
+            </ul>
+        </div>
+        <label class="form-label">Показано {{count}} элементов {{tags}}</label>
         {% if news %}
             {% for element in news%}
                 <div class = "alert alert-primary mt-2">
@@ -19,7 +40,7 @@
                             text-overflow: clip;
                         }
                         .size:hover {
-                            background: aliceblue;
+                            background: #f0f8ff;
                             white-space: normal;
                         }
                     </style>
@@ -34,4 +55,5 @@
             <p>У нас нет записей!</p>
         {% endif %}
     </div>
+</form>
 {% endblock %}

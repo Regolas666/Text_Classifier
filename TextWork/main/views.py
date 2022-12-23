@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import DetailView, UpdateView, DeleteView
 
 from .classificator import MainClassify as MC
-from .forms import ArticlesForm, TextsFormSecond
-from .models import Articles
+from .forms import ArticlesForm, TextsFormSecond, FilterTag
+from .models import Articles, TagsModel
 from django.http import HttpResponse
 
 # Вызываем здесь html-шаблоны.
@@ -15,7 +15,28 @@ def home(request):
 
 def index(request):
     news = Articles.objects.all()     # наш список-набор элементов
-    return render(request, 'main/index.html', {'title': 'Все новости', 'news': news})
+    count = news.count()
+    choices = TagsModel.objects.all()
+    answer = 1
+    tags = ''
+    if request.method == 'POST':
+        answer = int(request.POST.get('filter_by'))
+
+        #tags = "в категории " + str(TagsModel.objects.get(tagId=answer).tagName)
+        if answer == 1:
+            news = Articles.objects.filter(tag='pc')
+        else:
+            news = Articles.objects.filter(tag='кино')
+        count = news.count()
+    # forDifferent = FilterTag()
+    context = {
+        'title': 'Все новости',
+        'news': news,
+        'choices': choices,
+        'tags': tags,
+        'count': count
+    }
+    return render(request, 'main/index.html', context)
 
 
 class NewsDetailView(DetailView):
@@ -78,3 +99,9 @@ def create(request):
 def my_test_500_view(request):
     # Return an "Internal Server Error" 500 response code.
     return HttpResponse(status=500)
+
+
+def showAll(request):
+    news = Articles.objects.all()
+    count = news.count()
+    return index(request)
