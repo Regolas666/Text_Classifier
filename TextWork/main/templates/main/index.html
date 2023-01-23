@@ -18,7 +18,7 @@
                     <option value="{{ temp.tagId }} ">{{ temp.tagName }}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" value="вывести">
+                <input type="submit" value="ВЫВЕСТИ">
 
             </form>
             <li><a href="{% url 'news/showAll' %}">Показать все</a> </li>
@@ -30,7 +30,10 @@
         <label class="form-label">Показано {{count}} элементов {{tags}}</label>
         {% if news %}
             {% for element in news%}
+
                 <div class = "alert alert-primary mt-2">
+                    <a href="{% url 'news_update' element.id %}" class="btn btn-info">Редактировать</a>
+                    <a href="{% url 'news_delete' element.id %}" class="btn btn-danger">Удалить</a>
                     <h4>{{ element.title }}</h4>
                     <style>
                         .size {
@@ -47,8 +50,7 @@
                     <div class = "size">
                     <p>{{ element.full_text }}</p></div>
                     <h5>{{ element.tag }}</h5> <br>
-                    <a href="{% url 'news_delete' element.id %}" class="btn btn-danger">Удалить</a>
-                    <a href="{% url 'news_update' element.id %}" class="btn btn-info">Редактировать</a>
+
                 </div>
             {% endfor %}
         {% else %}

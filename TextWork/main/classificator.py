@@ -14,32 +14,32 @@ class MainClassify:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
-        num_words = 2600  # максимальное число слов, которое будем использовать
-        max_news_len = 100  # максимальная длина новости
+        num_words = 2600
+        max_news_len = 100
 
         with open('main/tokenizer_ver1.pickle', 'rb') as handle:
             tokenizer = pickle.load(handle)
 
         model = Sequential()
-        model.add(Embedding(num_words, 64, input_length=max_news_len))  # создание плотных векторов (64 числа на вектор)
-        model.add(Conv1D(250, 5, padding='valid', activation='relu'))  # свёрточная часть (1 свёрточный слой)
-        model.add(GlobalMaxPooling1D())  # выбор макс. значений из набора поступающих данных
-        model.add(Dense(128, activation='relu'))  # полносвязная часть для классификации
+        model.add(Embedding(num_words, 64, input_length=max_news_len))
+        model.add(Conv1D(250, 5, padding='valid', activation='relu'))
+        model.add(GlobalMaxPooling1D())
+        model.add(Dense(128, activation='relu'))
         model.add(Dropout(0.2))
-        model.add(Dense(1, activation='sigmoid'))  # выходной нейрон
+        model.add(Dense(1, activation='sigmoid'))
 
-        model.compile(optimizer='adam',  # оптимизатор
-                      loss='binary_crossentropy',  # функция ошибки (бинарная перекрёстная энтропия)
-                      metrics=['accuracy'])  # доля правильных ответов
+        model.compile(optimizer='adam',
+                      loss='binary_crossentropy',
+                      metrics=['accuracy'])
 
         model_save_path = 'main/best_model.h5'
-        # Загружаем модель с лучшей долей правильных ответов на проверочном наборе данных
+
         model.load_weights(model_save_path)
 
         text_test_case = self
-        #  text_test_case = strings(text_test_case)
+
         self = re.sub(r'[^\w\s]+|[\d]+|км/ч|\b\w{0,2}\b', r' ', self)
-        #  string = re.sub(r'http\S+', '', string)  # ????
+
         self = re.sub(r'\b\w{0,2}\b', r'', self)
         self = re.sub(r'\b\s+\b', r' ', self.strip())
         self = self.lower()

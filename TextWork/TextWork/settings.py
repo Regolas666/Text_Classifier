@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7qvpckkvdh7*o(%wzgu+-l%84+8x!a%c_3!d59wl5@k1f*(5j+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # ошибки на сайте отображает
+DEBUG = False  # ошибки на сайте отображает
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = [
         '127.0.0.1:8000',

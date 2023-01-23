@@ -6,11 +6,12 @@
 {% block content %}
     <div class="features">
         <div class = "alert alert-primary mt-0">
+            <a href="{% url 'news_update' article.id %}" class="btn btn-info">Редактировать</a>
+            <a href="{% url 'news_delete' article.id %}" class="btn btn-danger">Удалить</a>
             <h1>{{ article.title }}</h1>
             <p>{{ article.tag }}</p>
             <p>{{ article.full_text }}</p>
-            <a href="{% url 'news_delete' article.id %}" class="btn btn-danger">Удалить</a>
-            <a href="{% url 'news_update' article.id %}" class="btn btn-info">Редактировать</a>
+
         </div>
     </div>
 {% endblock %}

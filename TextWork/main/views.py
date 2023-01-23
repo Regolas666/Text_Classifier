@@ -67,6 +67,10 @@ def classify(request):
         if form.is_valid():
             text = form.cleaned_data.get("full_text")
             class_text = MC.choose_class(text)
+            if len(text.split()) < 10:
+                error = 'Текст слишком короткий! Введите хотя бы 10 слов!'
+                text = ''
+                class_text = 'Не определен класс новости!'
         else:
             error = 'Попробуйте ввести другие данные'
     form = ArticlesForm()
@@ -96,12 +100,11 @@ def create(request):
     return render(request, 'main/create.html', context)
 
 
-def my_test_500_view(request):
-    # Return an "Internal Server Error" 500 response code.
-    return HttpResponse(status=500)
+def error_404(request, exception):
+    return render(request, 'main/404.html')
 
 
-def showAll(request):
+def show_all(request):
     news = Articles.objects.all()
     count = news.count()
     return index(request)
