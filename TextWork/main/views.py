@@ -5,6 +5,7 @@ from .classificator import MainClassify as MC
 from .forms import ArticlesForm, TextsFormSecond, FilterTag
 from .models import Articles, TagsModel
 from django.http import HttpResponse
+from django.template import RequestContext
 
 # Вызываем здесь html-шаблоны.
 
@@ -102,6 +103,12 @@ def create(request):
 
 def error_404(request, exception):
     return render(request, 'main/404.html')
+
+
+def error_500(request, *args, **argv):
+    response = render(request, 'main/500.html')
+    response.status_code = 500
+    return response
 
 
 def show_all(request):

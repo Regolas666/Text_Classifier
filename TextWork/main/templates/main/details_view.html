@@ -11,7 +11,7 @@
             <h1>{{ article.title }}</h1>
             <p>{{ article.tag }}</p>
             <p>{{ article.full_text }}</p>
-
         </div>
+        <a href="{% url 'news' %}"  class="btn btn-success">Вернуться на список новостей</a>
     </div>
 {% endblock %}

@@ -13,7 +13,7 @@
             <form action="PageObjects" method="post">
                 <tr><th><label for="id_filter_by">Фильтровать по категориям:</label></th></tr>
                 <select id="id_filter_by" name="filter_by" required>
-                    <!--<select name="filter_by">-->
+                    <option disabled selected value> -- кино или pc? -- </option>
                     {% for temp in choices %}
                     <option value="{{ temp.tagId }} ">{{ temp.tagName }}</option>
                     {% endfor %}

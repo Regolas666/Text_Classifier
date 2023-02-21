@@ -8,3 +8,4 @@ urlpatterns = [
 ]
 
 handler404 = 'main.views.error_404'
+handler500 = 'main.views.error_500'

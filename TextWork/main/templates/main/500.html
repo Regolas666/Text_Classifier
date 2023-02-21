@@ -1,0 +1,13 @@
+{% extends 'main/base.html'%}
+
+{% block title %}Ой! Ошибка 500!{{ title}}
+{% endblock%}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Ой! Ошибка 500! </h1>
+     <p>Видимо, у вас проблемы с доступом! Попробуйте вернуться на главную!</p>
+   <hr class="my-3">
+    <a href="{% url 'home' %}"  class="btn btn-success" role="button">Вернуться на главную</a>
+</div>
+{% endblock%}

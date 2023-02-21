@@ -9,6 +9,7 @@
     <h3>Вы действительно хотите удалить эту статью?</h3>
         <form method="post">
             {% csrf_token %}
-            <button class="btn btn-success" type="submit">Да, удалить</button>
+            <button class="btn btn-danger" type="submit">Да, удалить</button>
+            <a href="{% url 'news' %}"  class="btn btn-success">Нет, вернуться на список новостей</a>
         </form>
 {% endblock %}
