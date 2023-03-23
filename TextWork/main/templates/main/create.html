@@ -8,7 +8,7 @@
     <h1>Заполните поля новости</h1>
         <form method="post">
             {% csrf_token %}
-            <br><select name="tag">
+            <br><select name="tag" required>
                 <option disabled selected value> -- Выберете категорию -- </option>
                 <option value="pc">pc</option>
                 <option value="кино">кино</option>
